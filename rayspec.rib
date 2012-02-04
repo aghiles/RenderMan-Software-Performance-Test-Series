@@ -1,0 +1,22 @@
+# see readme.txt for copyright info
+#Option "statistics" "endofframe" [1]
+FrameBegin 1
+Display "rayspec.tif" "file" "rgba"
+Format 640 480 1
+Exposure 1 2.0
+PixelSamples 4 4
+PixelFilter "gaussian" 2 2
+Clipping 0.1 1000
+Sides 1
+ShadingRate 4
+ShadingInterpolation "smooth"
+Projection "perspective" "fov" [54.4322]
+ScreenWindow -1 1 -0.75 0.75
+ConcatTransform [-0.842452 0.190195 0.504084 1.10832e-09 -7.29487e-10 0.935617 -0.353016 -3.14052e-11 0.538771 0.297399 0.788213 -6.09997e-10 0.531874 -1.45113 7.54714 1]
+WorldBegin 
+Attribute "visibility" "trace" [1]
+Attribute "visibility" "transmission" ["opaque"]
+Surface "bench" "string mode" ["rayspec"] "float samples" [16]
+ReadArchive "geom.rib"
+WorldEnd
+FrameEnd

@@ -1,0 +1,20 @@
+# see readme.txt for copyright info
+#Option "statistics" "endofframe" [1]
+FrameBegin 1
+Display "shader.tif" "file" "rgba"
+Format 1024 1024 1
+Exposure 1 2.0
+PixelSamples 4 4
+PixelFilter "gaussian" 2 2
+Clipping 0.1 1000
+Sides 1
+ShadingRate 0.1
+ShadingInterpolation "smooth"
+Projection "orthographic"
+ScreenWindow -0.35 0.15 0.5 1
+Translate  0 0 5
+WorldBegin 
+Surface "bench" "string mode" ["shader"]
+Patch "bilinear" "P" [-3 3 0 3 3 0 -3 -3 0 3 -3 0]
+WorldEnd
+FrameEnd
