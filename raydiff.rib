@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-#Option "statistics" "endofframe" [1]
+Option "statistics" "endofframe" [3] "filename" ["raydiff.txt"]
 FrameBegin 1
 Display "raydiff.tif" "file" "rgba"
 Format 640 480 1

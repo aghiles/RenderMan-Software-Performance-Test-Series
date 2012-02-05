@@ -48,7 +48,8 @@ surface bench(
 	string mode = "simple";
 	float samples = 16; /* only used in raytrace modes */
 	float ray_bias = 0.001;
-	float call_noise = 1;)
+	float call_noise = 1;
+	float modulate_opacity = 0;)
 {
 	normal NN = normalize(N);
 	
@@ -115,4 +116,7 @@ surface bench(
 		/* quick shader for hider test */
 		Ci = Oi * (diffuse(NN) + ambient());
 	}
+
+	if( modulate_opacity != 0 )
+		Oi *= noise(u,v)*0.1;
 }

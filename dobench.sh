@@ -68,7 +68,7 @@ fi
 # timerender "shader" foo.rib 2
 # arg1: user-visible name of this test
 # arg2: RIB file to render
-# arg3: # of processors to use (1 or 2)
+# arg3: # of processors to use
 # puts elapsed wall-clock time in seconds in a file called TIME
 
 function timerender {
@@ -118,6 +118,12 @@ HIDERTIME=`cat TIME`
 timerender "diffuse raytrace" raydiff.rib 1
 RAYDIFFTIME=`cat TIME`
 
+timerender "diffuse raytrace with displacements" raydiff_displacements.rib 1
+RAYDIFFDISPTIME=`cat TIME`
+
+timerender "diffuse raytrace with displacements" raydiff_shade.rib 1
+RAYDIFFSHADETIME=`cat TIME`
+
 timerender "specular raytrace" rayspec.rib 1
 RAYSPECTIME=`cat TIME`
 
@@ -135,7 +141,13 @@ if [ $CPUS -gt 1 ]; then
     timerender "diffuse raytrace" raydiff.rib $CPUS
     DUALRAYDIFFTIME=`cat TIME`
 
-    timerender "specular raytrace" rayspec.rib $CPUS
+    timerender "diffuse raytrace with displacements" raydiff_shade.rib $CPUS
+    DUALRAYDIFFSHADETIME=`cat TIME`
+
+    timerender "diffuse raytrace with displacements" raydiff_displacements.rib $CPUS
+    DUALRAYDIFFDISPTIME=`cat TIME`
+
+    timerender "specular raytrace with displacements" rayspec.rib $CPUS
     DUALRAYSPECTIME=`cat TIME`
 fi
 
@@ -187,6 +199,8 @@ Shader time:             $SHADERTIME sec
 Shader VM time:          $SHADERVMTIME sec
 Hider time:              $HIDERTIME sec
 Diffuse raytrace time:   $RAYDIFFTIME sec
+Diffuse raytrace+disp time:   $RAYDIFFDISPTIME sec
+Diffuse raytrace+shade time:   $RAYDIFFSHADETIME sec
 Specular raytrace time:  $RAYSPECTIME sec
 
 EOF
@@ -199,6 +213,8 @@ Shader time:             $DUALSHADERTIME sec
 Shader VM time:          $DUALSHADERVMTIME sec
 Hider time:              $DUALHIDERTIME sec
 Diffuse raytrace time:   $DUALRAYDIFFTIME sec
+Diffuse raytrace+disp time:   $DUALRAYDIFFDISPTIME sec
+Diffuse raytrace+shade time:   $DUALRAYDIFFSHADETIME sec
 Specular raytrace time:  $DUALRAYSPECTIME sec
 
 EOF

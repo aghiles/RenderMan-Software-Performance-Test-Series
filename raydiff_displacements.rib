@@ -1,14 +1,15 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["rayspec.txt"]
+Option "statistics" "endofframe" [3] "filename" ["raydiff_displacements.txt"]
+
 FrameBegin 1
-Display "rayspec.tif" "file" "rgba"
+Display "raydiff_displacements.tif" "file" "rgba"
 Format 640 480 1
 Exposure 1 2.0
 PixelSamples 4 4
 PixelFilter "gaussian" 2 2
 Clipping 0.1 1000
 Sides 1
-ShadingRate 4
+ShadingRate 10
 ShadingInterpolation "smooth"
 Projection "perspective" "fov" [54.4322]
 ScreenWindow -1 1 -0.75 0.75
@@ -16,7 +17,17 @@ ConcatTransform [-0.842452 0.190195 0.504084 1.10832e-09 -7.29487e-10 0.935617 -
 WorldBegin 
 Attribute "visibility" "trace" [1]
 Attribute "visibility" "transmission" ["opaque"]
-Surface "bench" "string mode" ["rayspec"] "float samples" [16]
+
+Surface "bench" "string mode" ["raydiff"] "float samples" [128]
+Attribute "displacementbound" "sphere" [0.01]
+
+# We put 2 here beacuse prman has an advanced technique with this value
+# So let's time it for its best possible performance.
+Attribute "trace" "displacements" [2]
+
+Displacement "stucco" "float Km" [0.05]
+
 ReadArchive "geom.rib"
 WorldEnd
+
 FrameEnd
