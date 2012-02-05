@@ -1,0 +1,75 @@
+color shader_bench (float u, float v)
+{
+     float i;
+     float x = 0,  y = 0;
+     float MAXIT = 256;
+     for (i = 0; i < MAXIT; i += 1) {
+             float oldx = x, oldy = y;
+             x = oldx*oldx - oldy*oldy + u;
+             y = 2*oldx*oldy + v;
+
+	     /* skip noise since it is renderer-dependent
+             point noiz = (point) noise (point (10*x, 10*y, 0));
+             x += 0.07 * noiz[0];
+             y += 0.07 * noiz[1];
+	     */
+
+	     float rsquared = x*x+y*y;
+	     if (rsquared > 10) {
+		     break;
+            }
+     }
+
+     float c = i/MAXIT;
+     return (color) spline (pow (1-c, 2),
+			    (color) (0),
+			    (color) (0),
+			    color (1, 0, 0),
+			    color (0, 0, 1),
+			    (color)  (1), (color) (1));
+}
+
+surface bench (string mode = "simple",
+	       float samples = 16,
+	       float ray_bias = 0.001)
+{
+	normal NN = normalize (N);
+
+	if(mode == "raydiff") {
+		float occ = occlusion ("ALL",
+				       P, NN, M_PI_2,
+				       "bias", ray_bias,
+				       "maxhitdist", 5000,
+				       "samples", samples);
+		C = opacity * (1 - occ);
+		
+	} else if(mode == "rayspec") {
+		float depth = raylevel();
+		if (depth > 1) {
+			C =(color)  (0);
+		} else {
+			float maxsamples,  minsamples,  coneangle;
+			if (depth == 0) {
+				maxsamples = samples;
+				minsamples = samples/4;
+				coneangle = radians (2.5);
+			} else {
+				maxsamples = 1;
+				minsamples = 1;
+				coneangle = 0;
+			}
+			vector II = normalize (I);
+			color hitcolor = 0,  total = 0;
+
+			// XXX Haven't done statement: Gather
+			total /= maxsamples;
+			C = opacity * total;
+		}
+	} else if(mode == "shader") {
+		point oP = transform ("object", P);
+		C = opacity * shader_bench(oP[0], oP[1]);
+	} else if(mode == "simple") {
+		C = opacity * (diffuse(NN) + ambient());
+	}
+}
+
