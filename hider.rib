@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["hider.txt"]
+Option "statistics" "endofframe" [3] "filename" ["hider.txt"] "xmlfilename" ["hider.xml"]
 FrameBegin 1
 Display "hider.tif" "file" "rgba"
 Format 1024 768 1

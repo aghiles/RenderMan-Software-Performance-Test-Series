@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["raydiff_displacements.txt"]
+Option "statistics" "endofframe" [3] "filename" ["raydiff_displacements.txt"] "xmlfilename" ["raydiff_displacements.xml"]
 
 FrameBegin 1
 Display "raydiff_displacements.tif" "file" "rgba"

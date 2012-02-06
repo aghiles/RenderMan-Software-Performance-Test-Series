@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["rayspec.txt"]
+Option "statistics" "endofframe" [3] "filename" ["rayspec.txt"] "xmlfilename" ["rayspec.xml"] 
 FrameBegin 1
 Display "rayspec.tif" "file" "rgba"
 Format 640 480 1

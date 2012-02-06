@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["raydiff_shade.txt"]
+Option "statistics" "endofframe" [3] "filename" ["raydiff_shade.txt"] "xmlfilename" ["raydiff_shade.xml"]
 FrameBegin 1
 Display "raydiff_shade.tif" "file" "rgba"
 Format 640 480 1

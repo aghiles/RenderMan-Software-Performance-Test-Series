@@ -1,5 +1,5 @@
 # see readme.txt for copyright info
-Option "statistics" "endofframe" [3] "filename" ["shader.txt"]
+Option "statistics" "endofframe" [3] "filename" ["shader.txt"] "xmlfilename" ["shader.xml"]
 FrameBegin 1
 Display "shader.tif" "file" "rgba"
 Format 1024 1024 1
