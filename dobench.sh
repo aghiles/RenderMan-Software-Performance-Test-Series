@@ -58,11 +58,17 @@ if [ ! -x /usr/bin/time ]; then
 fi
 
 # compile the shader
-echo "Compiling shader..."
+echo "Compiling shaders ..."
 if ! "$SHADER" bench.sl; then
     echo "Error compiling shader bench.sl"
     exit 1
 fi
+
+if ! "$SHADER" stucco.sl; then
+    echo "Error compiling shader stucco.sl"
+    exit 1
+fi
+
 
 # usage:
 # timerender "shader" foo.rib 2
