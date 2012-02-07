@@ -13,6 +13,9 @@ ShadingInterpolation "smooth"
 Projection "perspective" "fov" [54.4322]
 ScreenWindow -1 1 -0.75 0.75
 ConcatTransform [-0.842452 0.190195 0.504084 1.10832e-09 -7.29487e-10 0.935617 -0.353016 -3.14052e-11 0.538771 0.297399 0.788213 -6.09997e-10 0.531874 -1.45113 7.54714 1]
+
+Option "trace" "continuationbydefault" [1]
+
 WorldBegin 
 Attribute "visibility" "trace" [1]
 Attribute "visibility" "transmission" ["shader"]
